@@ -1,0 +1,31 @@
+{
+    "name": "terminal42/deployer-recipes",
+    "description": "terminal42 deployer recipes",
+    "type": "library",
+    "keywords": [
+        "deployer",
+        "recipes",
+        "deploy",
+        "deployment",
+        "contao"
+    ],
+    "homepage": "https://github.com/terminal42/deployer-recipes",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "terminal42 gmbh",
+            "homepage": "https://terminal42.ch"
+        }
+    ],
+    "require": {
+        "php": "^7.1"
+    },
+    "require-dev": {
+        "deployer/deployer": "^6.3"
+    },
+    "autoload": {
+        "files": [
+            "autoload.php"
+        ]
+    }
+}
