@@ -76,3 +76,7 @@ task('contao:update_database', function () {
     run('{{bin/php}} {{bin/console}} contao:database:update -d {{console_options}}');
 })->desc('Update database');
 
+// Download Contao Manager
+task('contao:download_manager', function () {
+    run('cd {{release_path}} && curl -LsO https://download.contao.org/contao-manager/stable/contao-manager.phar && mv contao-manager.phar web/contao-manager.phar.php');
+})->desc('Download the Contao Manager');

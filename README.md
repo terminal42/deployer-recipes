@@ -41,6 +41,20 @@ If you would like to disable the releases (e.g. for a dev system) you can do it 
 require 'recipe/disable-releases.php';
 ``` 
 
+### Contao Manager
+
+Although Contao Manager seems to be redundant if the system can be deployed, you may still want to install it
+e.g. for [trakked.io](https://www.trakked.io). To do that, simply add the following task to the list:
+
+```diff
+task('deploy', [
+    // …
+    'maintenance:enable',
++   'contao:download_manager'
+    // …
+])->desc('Deploy your project');
+```
+
 ## Further Reading
 
 - https://deployer.org/docs/
