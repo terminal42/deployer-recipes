@@ -11,15 +11,12 @@ require_once __DIR__ . '/node.php';
  */
 
 // Environment
-set('gulp_env', 'prod');
+set('encore_env', 'prod');
 
 // Exclude files
 add('exclude', [
-    'gulpfile.js',
-    'gulpfile-config.js',
-    'gulpfile-secret.js',
-
-    '/gulp',
+    'postcss.config.js',
+    'webpack.config.js',
 ]);
 
 /**
@@ -29,7 +26,7 @@ add('exclude', [
  */
 
 // Compile assets
-task('gulp:compile', function () {
-    run('./node_modules/.bin/gulp --{{gulp_env}}');
-})->desc('Compile assets')->local();
+task('encore:compile', function () {
+    runLocally('./node_modules/.bin/encore {{encore_env}}');
+})->desc('Compile assets');
 
