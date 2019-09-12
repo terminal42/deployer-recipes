@@ -24,6 +24,7 @@ add('writable_dirs', ['var']);
 
 // Exclude files
 add('exclude', [
+    '.env.local',
     'composer.json~',
     '/phpunit.*',
 

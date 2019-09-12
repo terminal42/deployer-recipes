@@ -21,6 +21,7 @@ add('exclude', [
     '.idea',
     '.php_cs',
     '.php_cs.cache',
+    '.circleci',
     'deploy.php',
     'deploy-hosts.yml',
 ]);
