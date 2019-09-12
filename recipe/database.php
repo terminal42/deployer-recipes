@@ -15,7 +15,7 @@ task('database:backup', function () {
     try {
         run('cd {{release_path}} && {{bin/composer}} show backup-manager/symfony');
     } catch (RuntimeException $e) {
-        writeln("\r\033[1A\033[33C … skipped");
+        writeln("\r\033[1A\033[32C … skipped");
 
         /** @noinspection PhpUndefinedMethodInspection */
         output()->setWasWritten(false);

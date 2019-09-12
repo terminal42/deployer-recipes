@@ -65,7 +65,7 @@ task('contao:update_database', function () {
     try {
         run('cd {{release_path}} && {{bin/composer}} show fuzzyma/contao-database-commands-bundle');
     } catch (RuntimeException $e) {
-        writeln("\r\033[1A\033[33C … skipped");
+        writeln("\r\033[1A\033[39C … skipped");
 
         /** @noinspection PhpUndefinedMethodInspection */
         output()->setWasWritten(false);

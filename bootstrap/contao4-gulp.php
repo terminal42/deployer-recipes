@@ -3,14 +3,17 @@
 namespace Deployer;
 
 $recipes = [
+    // Base recipes
     'common',
+    'symfony',
+    'rsync',
+
+    // Custom recipes
     'contao',
     'database',
     'deploy',
     'gulp',
     'maintenance',
-    'rsync',
-    'symfony',
 ];
 
 // Require the recipes
