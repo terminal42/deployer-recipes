@@ -22,7 +22,6 @@ add('initial_dirs', ['assets', 'system', 'var', 'web']);
 
 // Shared directories
 set('shared_dirs', [
-    'app/config/parameters.yml',
     'assets/images',
     'files',
     'system/config',
