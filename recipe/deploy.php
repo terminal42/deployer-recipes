@@ -18,6 +18,7 @@ add('exclude', [
     '.DS_Store',
     '.git',
     '.gitignore',
+    '.gitlab-ci.yml',
     '.idea',
     '.php_cs',
     '.php_cs.cache',
