@@ -17,7 +17,11 @@ set('console_options', function () {
 });
 
 // Shared files
-add('shared_files', ['app/config/parameters.yml']);
+if (is_file(getcwd() . '/app/config/parameters.yml')) {
+    add('shared_files', ['app/config/parameters.yml']);
+} elseif (is_file(getcwd() . '/config/parameters.yml')) {
+    add('shared_files', ['config/parameters.yml']);
+}
 
 // Writable dirs
 add('writable_dirs', ['var']);
