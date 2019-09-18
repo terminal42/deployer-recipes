@@ -21,7 +21,8 @@
         "php": "^7.1"
     },
     "require-dev": {
-        "deployer/deployer": "^6.3"
+        "deployer/deployer": "^6.3",
+        "deployer/recipes": "^6.2"
     },
     "autoload": {
         "files": [
