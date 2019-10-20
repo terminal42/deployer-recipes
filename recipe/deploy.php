@@ -16,6 +16,8 @@ use Symfony\Component\Yaml\Yaml;
 add('exclude', [
     '._*',
     '.DS_Store',
+    '.env',
+    '.env.local',
     '.git',
     '.gitignore',
     '.gitlab-ci.yml',
