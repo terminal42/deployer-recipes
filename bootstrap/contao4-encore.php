@@ -12,7 +12,7 @@ $recipes = [
     'contao',
     'database',
     'deploy',
-    'gulp',
+    'encore',
     'maintenance',
 ];
 
