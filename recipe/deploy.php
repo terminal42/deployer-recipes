@@ -66,7 +66,7 @@ task('deploy:platform_release', function () {
     $params = Yaml::parse(run('cat {{deploy_path}}/shared/' . $parametersFile));
     $params['parameters']['platform_version'] = $version;
 
-    run(sprintf('echo %s > {{deploy_path}}/shared/app/config/parameters.yml', escapeshellarg(Yaml::dump($params))));
+    run(sprintf('echo %s > {{deploy_path}}/shared/' . $parametersFile, escapeshellarg(Yaml::dump($params))));
 })->desc('Platform release (update version in parameters.yml)');
 
 // Create initial directories task
