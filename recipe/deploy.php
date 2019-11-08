@@ -55,7 +55,15 @@ task('deploy:platform_release', function () {
         throw new \RuntimeException('Unable to get the release version');
     }
 
-    $params = Yaml::parse(run('cat {{deploy_path}}/shared/app/config/parameters.yml'));
+    if (is_file(getcwd() . '/app/config/parameters.yml')) {
+        $parametersFile = 'app/config/parameters.yml';
+    } elseif (is_file(getcwd() . '/config/parameters.yml')) {
+        $parametersFile = 'config/parameters.yml';
+    } else {
+        throw new \RuntimeException('Unable to find the location of parameters.yml file.');
+    }
+
+    $params = Yaml::parse(run('cat {{deploy_path}}/shared/' . $parametersFile));
     $params['parameters']['platform_version'] = $version;
 
     run(sprintf('echo %s > {{deploy_path}}/shared/app/config/parameters.yml', escapeshellarg(Yaml::dump($params))));
