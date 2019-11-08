@@ -4,13 +4,29 @@ namespace Deployer;
 
 use Deployer\Exception\RuntimeException;
 
-require_once __DIR__ . '/symfony.php';
-
 /**
  * ===============================================================
  * Configuration
  * ===============================================================
  */
+
+// Environment
+set('symfony_env', 'prod');
+
+// Console options
+set('console_options', function () {
+    return '--no-interaction --env={{symfony_env}}';
+});
+
+// Shared files
+if (is_file(getcwd() . '/app/config/parameters.yml')) {
+    add('shared_files', ['app/config/parameters.yml']);
+} elseif (is_file(getcwd() . '/config/parameters.yml')) {
+    add('shared_files', ['config/parameters.yml']);
+}
+
+// Writable dirs
+add('writable_dirs', ['var']);
 
 // Console bin
 set('bin/console', function () {
@@ -34,15 +50,30 @@ set('shared_dirs', [
 add('exclude', [
     '/README.md',
 
+    '.env.local',
+    'composer.json~',
+    '/phpunit.*',
+
+    '/app/config/parameters.yml',
+    '/app/config/parameters.yml.dist',
+    '/config/parameters.yml',
+    '/config/parameters.yml.dist',
+    '/tests',
+    '/var',
+    '/vendor',
+
     '/app/Resources/contao/config/runonce*',
     '/assets',
     '/files',
     '/system/modules',
     '/system/themes',
+    '/web/bundles',
     '/web/assets',
     '/web/files',
     '/web/share',
     '/web/system',
+    '/web/app.php',
+    '/web/app_dev.php',
     '/web/index.php',
     '/web/favicon.ico',
     '/web/preview.php',

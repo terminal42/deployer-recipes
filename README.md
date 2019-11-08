@@ -20,7 +20,6 @@ require 'recipe/database.php';
 require 'recipe/deploy.php';
 require 'recipe/encore.php'; // or 'recipe/gulp.php';
 require 'recipe/maintenance.php';
-require 'recipe/symfony.php';
 ``` 
 
 ### Bootstrap file

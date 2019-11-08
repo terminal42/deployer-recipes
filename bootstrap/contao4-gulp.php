@@ -3,22 +3,26 @@
 namespace Deployer;
 
 $recipes = [
-    // Base recipes
     'common',
-    'symfony',
-    'rsync',
+    'symfony4',
 
-    // Custom recipes
-    'contao',
-    'database',
-    'deploy',
-    'gulp',
-    'maintenance',
+    'deployer/recipes/recipe/rsync',
+
+    'terminal42/deployer-recipes/recipe/contao',
+    'terminal42/deployer-recipes/recipe/database',
+    'terminal42/deployer-recipes/recipe/deploy',
+    'terminal42/deployer-recipes/recipe/gulp',
+    'terminal42/deployer-recipes/recipe/maintenance',
 ];
 
 // Require the recipes
 foreach ($recipes as $recipe) {
-    require_once sprintf('recipe/%s.php', $recipe);
+    if (false === strpos($recipe, '/')) {
+        require_once sprintf('recipe/%s.php', $recipe);
+        continue;
+    }
+
+    require_once sprintf('%s/vendor/%s.php', getcwd(), $recipe);
 }
 
 // Load the hosts
