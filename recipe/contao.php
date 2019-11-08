@@ -39,6 +39,7 @@ add('initial_dirs', ['assets', 'system', 'var', 'web']);
 // Shared directories
 set('shared_dirs', [
     'assets/images',
+    'contao-manager',
     'files',
     'system/config',
     'templates',
