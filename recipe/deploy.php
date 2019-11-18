@@ -16,6 +16,7 @@ use Symfony\Component\Yaml\Yaml;
 add('exclude', [
     '._*',
     '.DS_Store',
+    '.editorconfig',
     '.env',
     '.env.local',
     '.git',
