@@ -51,7 +51,6 @@ set('shared_dirs', [
 add('exclude', [
     '/README.md',
 
-    '.env.local',
     'composer.json~',
     '/phpunit.*',
 
