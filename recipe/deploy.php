@@ -43,7 +43,7 @@ task('deploy:composer_self_update', function () {
 // Platform release (update version in parameters.yml)
 task('deploy:platform_release', function () {
     try {
-        $version = runLocally('git describe');
+        $version = runLocally('git describe --tags --always');
     } catch (ProcessFailedException $e) {
         // If not successful, maybe there's no branch yet so we try getting the branch name
         $version = runLocally('git rev-parse --abbrev-ref HEAD');
