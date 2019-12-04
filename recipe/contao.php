@@ -111,3 +111,8 @@ task('contao:update_database', function () {
 task('contao:download_manager', function () {
     run('cd {{release_path}} && curl -LsO https://download.contao.org/contao-manager/stable/contao-manager.phar && mv contao-manager.phar web/contao-manager.phar.php');
 })->desc('Download the Contao Manager');
+
+// Lock the Contao Install Tool
+task('contao:lock_install_tool', function () {
+    run('{{bin/php}} {{bin/console}} contao:install:lock');
+})->desc('Lock the Contao Install Tool');
