@@ -75,7 +75,6 @@ add('exclude', [
     '/web/app.php',
     '/web/app_dev.php',
     '/web/index.php',
-    '/web/favicon.ico',
     '/web/preview.php',
     '/web/robots.txt',
 ]);
