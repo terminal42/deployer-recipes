@@ -12,7 +12,7 @@ use Deployer\Exception\RuntimeException;
 
 // Restore local database with remote one
 task(
-    'database:restore',
+    'database:retrieve',
     static function () {
         $src = get('rsync_src');
         while (is_callable($src)) {
@@ -65,7 +65,7 @@ task(
 )->desc('Downloads a database dump from given host and overrides the local database.');
 
 task(
-    'ask_restore',
+    'ask_retrieve',
     static function () {
         if (!askConfirmation('Local database will be overriden. OK?')) {
             die("Restore cancelled.\n");
@@ -73,7 +73,7 @@ task(
     }
 );
 
-before('database:restore', 'ask_restore');
+before('database:retrieve', 'ask_retrieve');
 
 // Restore remote database with local one
 task(

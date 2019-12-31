@@ -60,7 +60,7 @@ This collection provides a tasks to easily restore/release the database `dev <->
 
 First, include the `database-helpers.php` recipe.
 
-You can use the command `dep database:restore example.com` to download a database dump from remote (example.com) and overwrite the local database.
+You can use the command `dep database:retrieve example.com` to download a database dump from remote (example.com) and overwrite the local database.
 
 You can use the command `dep database:release example.com` to overwrite the remote (example.com) datbase with the local one.
 
