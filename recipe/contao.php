@@ -92,6 +92,14 @@ task('contao:validate', function () {
 
 // Update database
 task('contao:update_database', function () {
+    // First try native update command (Contao >= 4.9)
+    try {
+        run('{{bin/php}} {{bin/console}} contao:database:update {{console_options}}');
+
+        return;
+    } catch (RuntimeException $e) {}
+
+    // Then try command provided by contao-database-commands-bundle
     try {
         run('cd {{release_path}} && {{bin/composer}} show fuzzyma/contao-database-commands-bundle');
     } catch (RuntimeException $e) {
