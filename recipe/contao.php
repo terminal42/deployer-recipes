@@ -94,7 +94,9 @@ task('contao:validate', function () {
 task('contao:update_database', function () {
     // First try native update command (Contao >= 4.9)
     try {
-        run('{{bin/php}} {{bin/console}} contao:database:update {{console_options}}');
+        run('{{bin/php}} {{bin/console}} contao:migrate --schema-only {{console_options}}');
+
+        writeln('<comment>Please use the new contao:migrate task in your deploy.php!</comment>');
 
         return;
     } catch (RuntimeException $e) {}
@@ -113,6 +115,12 @@ task('contao:update_database', function () {
 
     run('{{bin/php}} {{bin/console}} contao:database:update -d {{console_options}}');
 })->desc('Update database');
+
+
+// Run Contao migrations and database update
+task('contao:migrate', function () {
+    run('{{bin/php}} {{bin/console}} contao:migrate {{console_options}}');
+})->desc('Run Contao migrations ');
 
 // Download Contao Manager
 task('contao:download_manager', function () {
