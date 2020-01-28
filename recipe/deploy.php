@@ -2,6 +2,7 @@
 
 namespace Deployer;
 
+use Deployer\Exception\ConfigurationException;
 use Deployer\Exception\RuntimeException;
 use Symfony\Component\Process\Exception\ProcessFailedException;
 use Symfony\Component\Yaml\Yaml;
@@ -85,6 +86,14 @@ task('deploy:create_initial_dirs', function () {
 
 // Update entry points depending on the environment
 task('deploy:entry_points', function () {
+    try {
+        if ($htaccess = get('htaccess_filename')) {
+            run('cd {{release_path}}/web && if [ -f "./'.$htaccess.'" ]; then mv ./'.$htaccess.' ./.htaccess; fi');
+            run('cd {{release_path}}/web && rm .htaccess_*');
+            return;
+        }
+    } catch (ConfigurationException $e) {}
+
     switch (get('symfony_env')) {
         case 'prod':
             run('cd {{release_path}}/web && if [ -f "./.htaccess_production" ]; then mv ./.htaccess_production ./.htaccess; fi');
