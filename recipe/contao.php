@@ -94,11 +94,13 @@ task('contao:validate', function () {
 task('contao:update_database', function () {
     // First try native update command (Contao >= 4.9)
     try {
-        run('{{bin/php}} {{bin/console}} contao:migrate --schema-only {{console_options}}');
+        if (version_compare(run('{{bin/php}} {{bin/console}} contao:version'), '4.9.0', '>=')) {
+            run('{{bin/php}} {{bin/console}} contao:migrate --schema-only {{console_options}}');
 
-        writeln('<comment>Please use the new contao:migrate task in your deploy.php!</comment>');
+            writeln('<comment>Please use the new contao:migrate task in your deploy.php!</comment>');
 
-        return;
+            return;
+        }
     } catch (RuntimeException $e) {}
 
     // Then try command provided by contao-database-commands-bundle
