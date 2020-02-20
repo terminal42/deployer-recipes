@@ -93,7 +93,7 @@ task('deploy', [
     'deploy:clear_accelerator_clear',
     'database:backup',
     'database:migrate',
-    'contao:update_database',
+    'contao:migrate',
     'maintenance:disable',
 
     // Cleanup
