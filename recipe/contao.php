@@ -121,7 +121,7 @@ task('contao:update_database', function () {
 
 // Run Contao migrations and database update
 task('contao:migrate', function () {
-    run('{{bin/php}} {{bin/console}} contao:migrate {{console_options}}');
+    run('{{bin/php}} {{bin/console}} contao:migrate --with-deletes {{console_options}}');
 })->desc('Run Contao migrations ');
 
 // Download Contao Manager
