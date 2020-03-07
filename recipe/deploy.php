@@ -123,12 +123,16 @@ task('deploy:clear_accelerator_clear', function () {
 })->desc('Clear accelerator cache');
 
 
-// Rest the OPcache (tasks deploy:clear_accelerator_clear and deploy:opcache_reset are interchangeable)
+// Reset the OPcache (tasks deploy:clear_accelerator_clear and deploy:opcache_reset are interchangeable)
 task(
     'deploy:opcache_reset',
     static function () {
-        run(
-            'cd {{current_path}} && echo "<?php opcache_reset();" > web/opcache.php && curl -L https://{{hostname}}/opcache.php && rm web/opcache.php'
-        );
+        try {
+            $domain = get('domain') ?: get('hostname');
+
+            run(
+                'cd {{current_path}} && echo "<?php opcache_reset();" > web/opcache.php && curl -L https://'.$domain.'/opcache.php && rm web/opcache.php'
+            );
+        } catch (ConfigurationException $e) {}
     }
 )->desc('Clear OPCache');
