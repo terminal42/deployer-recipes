@@ -127,12 +127,10 @@ task('deploy:clear_accelerator_clear', function () {
 task(
     'deploy:opcache_reset',
     static function () {
-        try {
-            $domain = get('domain') ?: get('hostname');
+        $domain = get('domain', get('hostname'));
 
-            run(
-                'cd {{current_path}} && echo "<?php opcache_reset();" > web/opcache.php && curl -L https://'.$domain.'/opcache.php && rm web/opcache.php'
-            );
-        } catch (ConfigurationException $e) {}
+        run(
+            'cd {{current_path}} && echo "<?php opcache_reset();" > web/opcache.php && curl -L https://'.$domain.'/opcache.php && rm web/opcache.php'
+        );
     }
 )->desc('Clear OPCache');
