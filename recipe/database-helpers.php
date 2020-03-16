@@ -33,7 +33,7 @@ task(
             throw new RuntimeException('Remote host is localhost.');
         }
 
-        echo 'Preparing backup on remote...';
+        echo 'Preparing backup on remote..';
 
         $dumpFilename = date('Y-m-d-H-i-s');
         run(
@@ -44,22 +44,26 @@ task(
         );
         echo ".finished\n";
         runLocally('mkdir -p var/sql');
-        echo 'Downloading backup archive...';
+        echo 'Downloading backup archive..';
         $host = $server->getRealHostname();
         $port = $server->getPort() ? ' -P ' . $server->getPort() : '';
         $user = !$server->getUser() ? '' : $server->getUser() . '@';
         runLocally("scp$port '$user$host:$dst/var/sql/$dumpFilename.sql.gz' '$src/var/sql'");
 
         echo ".finished\n";
-        echo 'Restoring local database.....';
+        echo 'Restoring local database....';
         runLocally(
             "php vendor/bin/contao-console backup-manager:restore contao local $dumpFilename.sql.gz -c gzip"
         );
         echo ".finished\n";
-        echo 'Run database update script...';
-        // Uses fuzzyma bundle, change to native command in Contao 4.9
-        runLocally('php vendor/bin/contao-console contao:database:update');
-        echo ".finished\n";
+        echo 'Run migration scripts.......';
+        try {
+            runLocally('php vendor/bin/contao-console contao:migrate --no-interaction');
+            echo ".finished\n";
+        } catch (RuntimeException $e) {
+            echo ".skipped\n";
+        }
+
         echo "  Restore of local database completed\n";
     }
 )->desc('Downloads a database dump from given host and overrides the local database.');
@@ -120,10 +124,7 @@ task(
             "cd {{release_path}} && {{bin/php}} {{bin/console}} backup-manager:restore contao local $dumpFilename.sql.gz -c gzip"
         );
         echo ".finished\n";
-        echo 'Run database update script.';
-        // Uses fuzzyma bundle, change to native command in Contao 4.9
-        run('cd {{release_path}} && {{bin/php}} {{bin/console}} contao:database:update');
-        echo ".finished\n";
+
         echo "  Restore of remote database completed\n";
     }
 )->desc('Restores the local database on the given host.');
@@ -138,3 +139,4 @@ task(
 );
 
 before('database:release', 'ask_release');
+after('database:release', 'contao:migrate');
