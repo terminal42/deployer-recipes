@@ -60,7 +60,7 @@ task(
         try {
             runLocally('php vendor/bin/contao-console contao:migrate --no-interaction');
             echo ".finished\n";
-        } catch (RuntimeException $e) {
+        } catch (\Exception $e) {
             echo ".skipped\n";
         }
 
