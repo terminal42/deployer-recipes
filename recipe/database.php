@@ -13,7 +13,7 @@ use Deployer\Exception\RuntimeException;
 // Backup database
 task('database:backup', function () {
     try {
-        run('cd {{release_path}} && {{bin/composer}} show backup-manager/symfony');
+        run('cd {{release_path}} && {{bin/composer}} show richardhj/contao-backup-manager');
     } catch (RuntimeException $e) {
         writeln("\r\033[1A\033[32C … skipped");
 
@@ -23,7 +23,7 @@ task('database:backup', function () {
         return;
     }
 
-    run('{{bin/php}} {{bin/console}} backup-manager:backup production local {{console_options}}');
+        run(sprintf('{{bin/php}} {{bin/console}} backup-manager:backup contao local -c gzip --filename %s.sql', date('Y-m-d-H-i-s')));
 })->desc('Backup database');
 
 // Migrate database
