@@ -43,12 +43,12 @@ task(
             )
         );
         echo ".finished\n";
-        runLocally('mkdir -p var/sql');
+        runLocally('mkdir -p backups');
         echo 'Downloading backup archive..';
         $host = $server->getRealHostname();
         $port = $server->getPort() ? ' -P ' . $server->getPort() : '';
         $user = !$server->getUser() ? '' : $server->getUser() . '@';
-        runLocally("scp$port '$user$host:$dst/var/sql/$dumpFilename.sql.gz' '$src/var/sql'");
+        runLocally("scp$port '$user$host:$dst/backups/$dumpFilename.sql.gz' '$src/backups'");
 
         echo ".finished\n";
         echo 'Restoring local database....';
@@ -116,7 +116,7 @@ task(
         $host = $server->getRealHostname();
         $port = $server->getPort() ? ' -P ' . $server->getPort() : '';
         $user = !$server->getUser() ? '' : $server->getUser() . '@';
-        runLocally("scp$port '$src/var/sql/$dumpFilename.sql.gz' '$user$host:$dst/var/sql'");
+        runLocally("scp$port '$src/backups/$dumpFilename.sql.gz' '$user$host:$dst/backups'");
 
         echo ".finished\n";
         echo 'Restoring remote database..';
