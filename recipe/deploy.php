@@ -136,7 +136,7 @@ task(
         $host = ($parts[1] ?: 'https://') . $parts[2];
 
         run(
-            'cd {{current_path}} && echo "<?php opcache_reset();" > web/opcache.php && curl -L '.$domain.'/opcache.php && rm web/opcache.php'
+            'cd {{current_path}} && echo "<?php opcache_reset();" > web/opcache.php && curl -L '.$host.'/opcache.php && rm web/opcache.php'
         );
     }
 )->desc('Clear OPCache');
