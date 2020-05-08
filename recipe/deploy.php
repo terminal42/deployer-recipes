@@ -89,7 +89,7 @@ task('deploy:entry_points', function () {
     try {
         if ($htaccess = get('htaccess_filename')) {
             run('cd {{release_path}}/web && if [ -f "./'.$htaccess.'" ]; then mv ./'.$htaccess.' ./.htaccess; fi');
-            run('cd {{release_path}}/web && rm .htaccess_*');
+            run('cd {{release_path}}/web && rm -f .htaccess_*');
             return;
         }
     } catch (ConfigurationException $e) {}
