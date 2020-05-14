@@ -26,6 +26,10 @@ add('exclude', [
     '.php_cs',
     '.php_cs.cache',
     '.circleci',
+
+    '/.dependabot',
+    '/.github',
+
     'deploy.php',
     'deploy-hosts.yml',
 ]);
