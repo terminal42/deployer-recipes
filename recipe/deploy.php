@@ -110,8 +110,26 @@ task('deploy:entry_points', function () {
     }
 })->desc('Update entry points');
 
-// Cache accelerator cache
+// Cache accelerator cache (deprecated)
 task('deploy:clear_accelerator_clear', function () {
+    writeln('<comment>[DEPRECATED] Please use the new deploy:cache_accelerator_clear task in your deploy.php!</comment>');
+
+    try {
+        run('cd {{release_path}} && {{bin/composer}} show smart-core/accelerator-cache-bundle');
+    } catch (RuntimeException $e) {
+        writeln("\r\033[1A\033[40C … skipped");
+
+        /** @noinspection PhpUndefinedMethodInspection */
+        output()->setWasWritten(false);
+
+        return;
+    }
+
+    run('{{bin/php}} {{bin/console}} cache:accelerator:clear {{console_options}}');
+})->desc('Clear accelerator cache [DEPRECATED]');
+
+// Cache accelerator cache
+task('deploy:cache_accelerator_clear', function () {
     try {
         run('cd {{release_path}} && {{bin/composer}} show smart-core/accelerator-cache-bundle');
     } catch (RuntimeException $e) {
@@ -136,7 +154,7 @@ task(
             get('domain', get('hostname')),
             $parts
         );
-        
+
         $host = ($parts[1] ?: 'https://') . $parts[2];
 
         run(

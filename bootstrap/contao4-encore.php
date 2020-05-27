@@ -90,7 +90,7 @@ task('deploy', [
     // Release
     'maintenance:enable',
     'deploy:symlink',
-    'deploy:clear_accelerator_clear',
+    'deploy:cache_accelerator_clear',
     'database:backup',
     'database:migrate',
     'contao:migrate',
