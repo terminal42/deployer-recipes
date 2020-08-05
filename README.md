@@ -5,7 +5,7 @@ This repository contains recipes to integrate with [deployer](https://github.com
 ## Installing
 
 ```
-composer require deployer/recipes terminal42/deployer-recipes:dev-master@dev --dev
+composer require deployer/recipes terminal42/deployer-recipes:dev-main@dev --dev
 ```
 
 ## Usage
