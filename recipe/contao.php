@@ -58,6 +58,7 @@ add('exclude', [
     '/app/config/parameters.yml.dist',
     '/config/parameters.yml',
     '/config/parameters.yml.dist',
+    '/contao-manager',
     '/tests',
     '/var',
     '/vendor',
