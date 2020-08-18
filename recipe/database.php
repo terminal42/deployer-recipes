@@ -10,6 +10,8 @@ use Deployer\Exception\RuntimeException;
  * ===============================================================
  */
 
+add('shared_dirs', ['backups']);
+
 // Backup database
 task('database:backup', function () {
     try {
