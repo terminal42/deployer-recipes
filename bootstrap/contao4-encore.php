@@ -62,6 +62,9 @@ set('rsync', function () {
     ];
 });
 
+// Recommended when using the database:backup task
+add('shared_dirs', ['backups']);
+
 /**
  * ===============================================================
  * Tasks
