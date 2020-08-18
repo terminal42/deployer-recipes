@@ -13,7 +13,7 @@ use Deployer\Exception\RuntimeException;
 // Backup database
 task('database:backup', function () {
     try {
-        run('cd {{release_path}} && {{bin/composer}} show richardhj/contao-backup-manager');
+        run('cd {{release_path}} && {{bin/composer}} show backup-manager/symfony');
     } catch (RuntimeException $e) {
         writeln("\r\033[1A\033[32C … skipped");
 
