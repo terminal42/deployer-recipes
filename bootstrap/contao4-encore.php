@@ -92,7 +92,6 @@ task('deploy', [
     'deploy:symlink',
     'deploy:cache_accelerator_clear',
     'database:backup',
-    'database:migrate',
     'contao:migrate',
     'maintenance:disable',
 
