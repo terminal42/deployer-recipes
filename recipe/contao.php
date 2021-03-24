@@ -62,6 +62,8 @@ add('exclude', [
     '/tests',
     '/var',
     '/vendor',
+    
+    '/themes/*/assets',
 
     '/app/Resources/contao/config/runonce*',
     '/assets',
