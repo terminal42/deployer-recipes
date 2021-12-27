@@ -4,16 +4,8 @@ namespace Deployer;
 
 require_once __DIR__ . '/node.php';
 
-/**
- * ===============================================================
- * Configuration
- * ===============================================================
- */
-
-// Environment
 set('gulp_env', 'prod');
 
-// Exclude files
 add('exclude', [
     'gulpfile.js',
     'gulpfile-config.js',
@@ -22,14 +14,9 @@ add('exclude', [
     '/gulp',
 ]);
 
-/**
- * ===============================================================
- * Tasks
- * ===============================================================
- */
-
-// Compile assets
+desc('Compile assets');
 task('gulp:compile', function () {
-    run('./node_modules/.bin/gulp --{{gulp_env}}');
-})->desc('Compile assets')->local();
+    runLocally('./node_modules/.bin/gulp --{{gulp_env}}');
+});
 
+before('deploy', 'gulp:compile');

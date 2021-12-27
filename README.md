@@ -1,74 +1,52 @@
 # terminal42 deployer recipes
 
-This repository contains recipes to integrate with [deployer](https://github.com/deployphp/deployer).
+This repository contains recipes to integrate with [Deployer](https://github.com/deployphp/deployer).
+These recipes are to extend the official ones. Read the Contao documentation about Deployer before.
 
 ## Installing
 
+Version 2.0 of this repository is for use with Contao >=4.13 and Deployer >=7.0.
+
 ```
-composer require deployer/recipes terminal42/deployer-recipes:dev-main@dev --dev
+composer require deployer/recipes terminal42/deployer-recipes:^2.0 --dev
 ```
 
 ## Usage
 
-### Include recipes manually
-
-Include recipes in your `deploy.php` file:
-
-```php
-require 'recipe/contao.php';
-require 'recipe/database.php';
-require 'recipe/deploy.php';
-require 'recipe/encore.php'; // or 'recipe/gulp.php';
-require 'recipe/maintenance.php';
-``` 
-
-### Bootstrap file
-
-Copy [`deploy-hosts.yml`](bootstrap/deploy-hosts.yml) to your project root and one of 
-the [bootstrap files](bootstrap) as your `deploy.php` file:
-
-1. [`contao4-encore.php`](bootstrap/contao4-encore.php) – Contao 4 setup with Encore for assets management
-2. [`contao4-gulp.php`](bootstrap/contao4-gulp.php) – Contao 4 setup with Gulp for assets management
+Copy the [deploy.php](bootstrap/deploy.php) to your project root. Adjust the file as needed.
 
 ## Pro Tips
 
-### Disable releases
+### Files sync
 
-If you would like to disable the releases (e.g. for a dev system) you can do it simply by including the recipe:
+This recipe provides a task to easily download the "files" folder from remote.
+
+First, include the `files-sync.php` recipe:
 
 ```php
-require 'recipe/disable-releases.php';
-``` 
-
-### Contao Manager
-
-Although Contao Manager seems to be redundant if the system can be deployed, you may still want to install it
-e.g. for [trakked.io](https://www.trakked.io). To do that, simply add the following task to the list:
-
-```diff
-task('deploy', [
-    // …
-    'maintenance:enable',
-+   'contao:download_manager'
-    // …
-])->desc('Deploy your project');
+require __DIR__.'/vendor/terminal42/deployer-recipes/recipe/files-sync.php';
 ```
+
+You can use the command `dep files:retrieve example.com` to sync the remote "files" folder with the local "files" folder.
 
 ### Database Helpers (Restore and release)
 
 This collection provides a tasks to easily restore/release the database `dev <-> live` unidirectionally.
 
-First, include the `database-helpers.php` recipe.
+First, include the `database-helpers.php` recipe:
+
+```php
+require __DIR__.'/vendor/terminal42/deployer-recipes/recipe/database-helpers.php';
+```
 
 You can use the command `dep database:retrieve example.com` to download a database dump from remote (example.com) and overwrite the local database.
 
-You can use the command `dep database:release example.com` to overwrite the remote (example.com) datbase with the local one.
+You can use the command `dep database:release example.com` to overwrite the remote (example.com) database with the local one.
 
 ## Further Reading
 
+- https://docs.contao.org/....
 - https://deployer.org/docs/
-- https://deployer.org/recipes.html
-- https://github.com/eikona-media/deployer-recipes
 
 ## License
 

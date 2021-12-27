@@ -18,12 +18,13 @@
         }
     ],
     "require": {
-        "php": "^7.1 || ^8.0"
+        "php": "^7.4 || ^8.0"
     },
     "require-dev": {
-        "deployer/deployer": "^6.3",
-        "deployer/recipes": "^6.2"
+        "deployer/deployer": "^7.0"
     },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
     "autoload": {
         "files": [
             "autoload.php"
