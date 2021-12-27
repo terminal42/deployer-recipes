@@ -18,7 +18,7 @@ set('rsync_src', __DIR__);
 host('www.example.org')
     ->set('remote_user', 'foo')
     ->set('deploy_path', '/var/www/{{remote_user}}/html/{{hostname}}')
-    ->set('bin/composer', 'php /var/www/{{remote_user}}/composer.phar')
+    ->set('bin/composer', '{{bin/php}} /var/www/{{remote_user}}/composer.phar')
     ->set('cachetool_args', '--web=SymfonyHttpClient --web-path=./{{public_path}} --web-url=https://{{hostname}}')
 ;
 
